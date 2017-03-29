@@ -1,0 +1,13 @@
+{
+    "name": "shirase55/ckeditor-image",
+    "description": "User frendly ckeditor image plugin",
+    "require": {
+        "ckeditor/ckeditor": "^4.6"
+    },
+    "authors": [
+        {
+            "name": "shirase",
+            "email": "shirase55@gmail.com"
+        }
+    ]
+}
