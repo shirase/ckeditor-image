@@ -2,7 +2,6 @@
  * @license Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
-
 ( function() {
 	var imageDialog = function( editor, dialogType ) {
 			// Load image preview.
@@ -1244,7 +1243,7 @@
 			};
 		};
 
-	CKEDITOR.dialog.add( 'image', function( editor ) {
+	CKEDITOR.dialog.add( 'image-uf', function( editor ) {
 		return imageDialog( editor, 'image' );
 	} );
 

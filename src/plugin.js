@@ -9,7 +9,7 @@
 
 ( function() {
 
-	CKEDITOR.plugins.add( 'image', {
+	CKEDITOR.plugins.add( 'image-uf', {
 		requires: 'dialog',
 		// jscs:disable maximumLineLength
 		lang: 'af,ar,az,bg,bn,bs,ca,cs,cy,da,de,de-ch,el,en,en-au,en-ca,en-gb,eo,es,et,eu,fa,fi,fo,fr,fr-ca,gl,gu,he,hi,hr,hu,id,is,it,ja,ka,km,ko,ku,lt,lv,mk,mn,ms,nb,nl,no,oc,pl,pt,pt-br,ro,ru,si,sk,sl,sq,sr,sr-latn,sv,th,tr,tt,ug,uk,vi,zh,zh-cn', // %REMOVE_LINE_CORE%
@@ -22,7 +22,7 @@
 			if ( editor.plugins.image2 )
 				return;
 
-			var pluginName = 'image';
+			var pluginName = 'image-uf';
 
 			// Register the dialog.
 			CKEDITOR.dialog.add( pluginName, this.path + 'dialogs/image.js' );
@@ -44,10 +44,11 @@
 			} ) );
 
 			// Register the toolbar button.
-			editor.ui.addButton && editor.ui.addButton( 'Image', {
+			editor.ui.addButton && editor.ui.addButton( 'image-uf', {
 				label: editor.lang.common.image,
 				command: pluginName,
-				toolbar: 'insert,10'
+				toolbar: 'insert,10',
+                icon: this.path + 'icons/image.png'
 			} );
 
 			editor.on( 'doubleclick', function( evt ) {
