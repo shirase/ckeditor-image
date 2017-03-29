@@ -1,8 +1,8 @@
 {
     "name": "shirase55/ckeditor-image",
     "description": "User frendly ckeditor image plugin",
-    "require": {
-        "ckeditor/ckeditor": "*"
+    "require-dev": {
+        "ckeditor/ckeditor": "^4.6"
     },
     "authors": [
         {
