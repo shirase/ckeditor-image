@@ -1,8 +1,11 @@
 {
     "name": "shirase55/ckeditor-image",
     "description": "User frendly ckeditor image plugin",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require-dev": {
-        "ckeditor/ckeditor": "^4.6"
+        "ckeditor/ckeditor": "^4.6",
+        "sunhater/kcfinder": "dev-master"
     },
     "authors": [
         {
