@@ -1055,20 +1055,36 @@
 					hidden: true,
 					filebrowser: 'uploadButton',
 					label: editor.lang.image.upload,
-					elements: [ {
-						type: 'file',
-						id: 'upload',
-						label: editor.lang.image.btnUpload,
-						style: 'height:40px',
-						size: 38
-					},
-					{
-						type: 'fileButton',
-						id: 'uploadButton',
-						filebrowser: 'info:txtUrl',
-						label: editor.lang.image.btnUpload,
-						'for': [ 'Upload', 'upload' ]
-					} ]
+					elements: [
+						{
+							type: 'html',
+							id: 'upload2',
+							html: '<div><form enctype="multipart/form-data" method="post" dir="ltr" action="" target="file-upload-frame"><input type="file" name="upload" value=""></form><iframe style="display: none" id="file-upload-frame" name="file-upload-frame"></iframe></div>',
+							onLoad: function() {
+								this._.buttons = [];
+
+								var element = this.getElement();
+								var input = element.findOne('input[type=file]');
+
+								editor._.filebrowserSe = this;
+								element.findOne('form').setAttribute('action', editor.config.filebrowserUploadUrl + (editor.config.filebrowserUploadUrl.indexOf('?')?'':'?') + '&CKEditor='+editor.name+'&CKEditorFuncNum='+editor._.filebrowserFn);
+
+								this.reset = function() {};
+
+								input.on('change', function() {
+									input.getAscendant('form').$.submit();
+								});
+							}
+						},
+						{
+							type: 'fileButton',
+							id: 'uploadButton',
+							style: 'display:none',
+							filebrowser: 'info:txtUrl',
+							label: editor.lang.image.btnUpload,
+							'for': [ 'Upload', 'upload2' ]
+						}
+					]
 				},
 				{
 					id: 'advanced',

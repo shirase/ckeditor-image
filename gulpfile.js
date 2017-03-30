@@ -17,6 +17,6 @@ gulp.task('js', ['copy'], function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['js'], function() {
     gulp.watch('./src/**/*.js', ['js']);
 });
