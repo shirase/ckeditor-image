@@ -590,10 +590,7 @@
                                             style: 'display:none',
                                             filebrowser: 'info:txtUrl',
                                             label: editor.lang.image.btnUpload,
-                                            'for': [ 'info', 'upload' ],
-                                            onLoad: function() {
-                                                //this.getDialog().getContentElement('info', 'upload').getInputElement().setStyles({padding:'100px'});
-                                            }
+                                            'for': [ 'info', 'upload' ]
                                         }
 									]
 								}
