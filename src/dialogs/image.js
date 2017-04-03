@@ -556,17 +556,48 @@
 								},
 								validate: CKEDITOR.dialog.validate.notEmpty( editor.lang.image.urlMissing )
 							},
-							{
-								type: 'button',
-								id: 'browse',
-								// v-align with the 'txtUrl' field.
-								// TODO: We need something better than a fixed size here.
-								style: 'display:inline-block;margin-top:14px;',
-								align: 'center',
-								label: editor.lang.common.browseServer,
-								hidden: true,
-								filebrowser: 'info:txtUrl'
-							} ]
+								{
+									type: 'hbox',
+                                    children: [
+                                        /*{
+                                            type: 'button',
+                                            id: 'browse',
+                                            // v-align with the 'txtUrl' field.
+                                            // TODO: We need something better than a fixed size here.
+                                            style: 'display:inline-block;margin-top:14px;',
+                                            align: 'center',
+                                            label: editor.lang.common.browseServer,
+                                            hidden: true,
+                                            filebrowser: 'info:txtUrl'
+                                        },*/
+                                        {
+                                            type: 'html',
+											html: '<a class="cke_dialog_ui_button" style="display:inline-block;margin-top:14px;margin-right:-150px"><span class="cke_dialog_ui_button">'+editor.lang.image.btnUpload+'</span></a>'
+                                        },
+                                        {
+                                            type: 'file',
+                                            id: 'upload',
+                                            label: editor.lang.image.btnUpload,
+                                            style: 'width:150px;height:40px;opacity:0;position:relative;left:-20px',
+                                            size: 38,
+                                            onChange: function() {
+                                                this._.buttons[0].fire('click');
+                                            }
+                                        },
+                                        {
+                                            type: 'fileButton',
+                                            id: 'uploadButton',
+                                            style: 'display:none',
+                                            filebrowser: 'info:txtUrl',
+                                            label: editor.lang.image.btnUpload,
+                                            'for': [ 'info', 'upload' ],
+                                            onLoad: function() {
+                                                //this.getDialog().getContentElement('info', 'upload').getInputElement().setStyles({padding:'100px'});
+                                            }
+                                        }
+									]
+								}
+							]
 						} ]
 					},
 					{
