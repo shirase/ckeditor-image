@@ -55,7 +55,7 @@
 				var element = evt.data.element;
 
 				if ( element.is( 'img' ) && !element.data( 'cke-realelement' ) && !element.isReadOnly() )
-					evt.data.dialog = 'image';
+					evt.data.dialog = 'image-uf';
 			} );
 
 			// If the "menu" plugin is loaded, register the menu items.
@@ -63,7 +63,7 @@
 				editor.addMenuItems( {
 					image: {
 						label: editor.lang.image.menu,
-						command: 'image',
+						command: 'image-uf',
 						group: 'image'
 					}
 				} );
