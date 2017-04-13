@@ -819,107 +819,6 @@
 									}
 								},
 								{
-									type: 'text',
-									id: 'txtHSpace',
-									requiredContent: 'img{margin-left,margin-right}',
-									width: '60px',
-									label: editor.lang.image.hSpace,
-									'default': '',
-									onKeyUp: function() {
-										updatePreview( this.getDialog() );
-									},
-									onChange: function() {
-										commitInternally.call( this, 'advanced:txtdlgGenStyle' );
-									},
-									validate: CKEDITOR.dialog.validate.integer( editor.lang.image.validateHSpace ),
-									setup: function( type, element ) {
-										if ( type == IMAGE ) {
-											var value, marginLeftPx, marginRightPx,
-												marginLeftStyle = element.getStyle( 'margin-left' ),
-												marginRightStyle = element.getStyle( 'margin-right' );
-
-											marginLeftStyle = marginLeftStyle && marginLeftStyle.match( pxLengthRegex );
-											marginRightStyle = marginRightStyle && marginRightStyle.match( pxLengthRegex );
-											marginLeftPx = parseInt( marginLeftStyle, 10 );
-											marginRightPx = parseInt( marginRightStyle, 10 );
-
-											value = ( marginLeftPx == marginRightPx ) && marginLeftPx;
-											isNaN( parseInt( value, 10 ) ) && ( value = element.getAttribute( 'hspace' ) );
-
-											this.setValue( value );
-										}
-									},
-									commit: function( type, element ) {
-										var value = parseInt( this.getValue(), 10 );
-										if ( type == IMAGE || type == PREVIEW ) {
-											if ( !isNaN( value ) ) {
-												element.setStyle( 'margin-left', CKEDITOR.tools.cssLength( value ) );
-												element.setStyle( 'margin-right', CKEDITOR.tools.cssLength( value ) );
-											} else if ( !value && this.isChanged() ) {
-												element.removeStyle( 'margin-left' );
-												element.removeStyle( 'margin-right' );
-											}
-
-											if ( type == IMAGE )
-												element.removeAttribute( 'hspace' );
-										} else if ( type == CLEANUP ) {
-											element.removeAttribute( 'hspace' );
-											element.removeStyle( 'margin-left' );
-											element.removeStyle( 'margin-right' );
-										}
-									}
-								},
-								{
-									type: 'text',
-									id: 'txtVSpace',
-									requiredContent: 'img{margin-top,margin-bottom}',
-									width: '60px',
-									label: editor.lang.image.vSpace,
-									'default': '',
-									onKeyUp: function() {
-										updatePreview( this.getDialog() );
-									},
-									onChange: function() {
-										commitInternally.call( this, 'advanced:txtdlgGenStyle' );
-									},
-									validate: CKEDITOR.dialog.validate.integer( editor.lang.image.validateVSpace ),
-									setup: function( type, element ) {
-										if ( type == IMAGE ) {
-											var value, marginTopPx, marginBottomPx,
-												marginTopStyle = element.getStyle( 'margin-top' ),
-												marginBottomStyle = element.getStyle( 'margin-bottom' );
-
-											marginTopStyle = marginTopStyle && marginTopStyle.match( pxLengthRegex );
-											marginBottomStyle = marginBottomStyle && marginBottomStyle.match( pxLengthRegex );
-											marginTopPx = parseInt( marginTopStyle, 10 );
-											marginBottomPx = parseInt( marginBottomStyle, 10 );
-
-											value = ( marginTopPx == marginBottomPx ) && marginTopPx;
-											isNaN( parseInt( value, 10 ) ) && ( value = element.getAttribute( 'vspace' ) );
-											this.setValue( value );
-										}
-									},
-									commit: function( type, element ) {
-										var value = parseInt( this.getValue(), 10 );
-										if ( type == IMAGE || type == PREVIEW ) {
-											if ( !isNaN( value ) ) {
-												element.setStyle( 'margin-top', CKEDITOR.tools.cssLength( value ) );
-												element.setStyle( 'margin-bottom', CKEDITOR.tools.cssLength( value ) );
-											} else if ( !value && this.isChanged() ) {
-												element.removeStyle( 'margin-top' );
-												element.removeStyle( 'margin-bottom' );
-											}
-
-											if ( type == IMAGE )
-												element.removeAttribute( 'vspace' );
-										} else if ( type == CLEANUP ) {
-											element.removeAttribute( 'vspace' );
-											element.removeStyle( 'margin-top' );
-											element.removeStyle( 'margin-bottom' );
-										}
-									}
-								},
-								{
 									id: 'cmbAlign',
 									requiredContent: 'img{float}',
 									type: 'select',
@@ -981,6 +880,188 @@
 											element.removeStyle( 'float' );
 										}
 									}
+								},
+								{
+									type: 'html',
+									html: '<label style="position: relative;top: 1.3em">'+editor.lang.image.hSpace+'</label>'
+								},
+								{
+									type: 'hbox',
+									children: [
+										{
+											type: 'text',
+											id: 'txtSpaceLeft',
+											requiredContent: 'img{margin-left}',
+											width: '60px',
+											'default': '',
+											onKeyUp: function() {
+												updatePreview( this.getDialog() );
+											},
+											onChange: function() {
+												commitInternally.call( this, 'advanced:txtdlgGenStyle' );
+											},
+											validate: CKEDITOR.dialog.validate.integer( editor.lang.image.validateVSpace ),
+											setup: function( type, element ) {
+												if ( type == IMAGE ) {
+													var value,
+														marginLeftStyle = element.getStyle( 'margin-left' );
+
+													marginLeftStyle = marginLeftStyle && marginLeftStyle.match( pxLengthRegex );
+													value = parseInt( marginLeftStyle, 10 );
+
+													this.setValue( value );
+												}
+											},
+											commit: function( type, element ) {
+												var value = parseInt( this.getValue(), 10 );
+												if ( type == IMAGE || type == PREVIEW ) {
+													if ( !isNaN( value ) ) {
+														element.setStyle( 'margin-left', CKEDITOR.tools.cssLength( value ) );
+													} else if ( !value && this.isChanged() ) {
+														element.removeStyle( 'margin-left' );
+													}
+
+													if ( type == IMAGE )
+														element.removeAttribute( 'vspace' );
+												} else if ( type == CLEANUP ) {
+													element.removeAttribute( 'vspace' );
+													element.removeStyle( 'margin-left' );
+												}
+											}
+										},
+										{
+											type: 'text',
+											id: 'txtSpaceRight',
+											requiredContent: 'img{margin-right}',
+											width: '60px',
+											'default': '',
+											onKeyUp: function() {
+												updatePreview( this.getDialog() );
+											},
+											onChange: function() {
+												commitInternally.call( this, 'advanced:txtdlgGenStyle' );
+											},
+											validate: CKEDITOR.dialog.validate.integer( editor.lang.image.validateVSpace ),
+											setup: function( type, element ) {
+												if ( type == IMAGE ) {
+													var value,
+														marginRightStyle = element.getStyle( 'margin-right' );
+
+													marginRightStyle = marginRightStyle && marginRightStyle.match( pxLengthRegex );
+													value = parseInt( marginRightStyle, 10 );
+
+													this.setValue( value );
+												}
+											},
+											commit: function( type, element ) {
+												var value = parseInt( this.getValue(), 10 );
+												if ( type == IMAGE || type == PREVIEW ) {
+													if ( !isNaN( value ) ) {
+														element.setStyle( 'margin-right', CKEDITOR.tools.cssLength( value ) );
+													} else if ( !value && this.isChanged() ) {
+														element.removeStyle( 'margin-right' );
+													}
+
+													if ( type == IMAGE )
+														element.removeAttribute( 'vspace' );
+												} else if ( type == CLEANUP ) {
+													element.removeAttribute( 'vspace' );
+													element.removeStyle( 'margin-right' );
+												}
+											}
+										}
+									]
+								},
+								{
+									type: 'html',
+                                    html: '<label style="position: relative;top: 1.3em">'+editor.lang.image.vSpace+'</label>'
+								},
+								{
+									type: 'hbox',
+                                    children: [
+                                        {
+                                            type: 'text',
+                                            id: 'txtSpaceTop',
+                                            requiredContent: 'img{margin-top}',
+                                            width: '60px',
+                                            'default': '',
+                                            onKeyUp: function() {
+                                                updatePreview( this.getDialog() );
+                                            },
+                                            onChange: function() {
+                                                commitInternally.call( this, 'advanced:txtdlgGenStyle' );
+                                            },
+                                            validate: CKEDITOR.dialog.validate.integer( editor.lang.image.validateVSpace ),
+                                            setup: function( type, element ) {
+                                                if ( type == IMAGE ) {
+                                                    var value,
+                                                        marginTopStyle = element.getStyle( 'margin-top' );
+
+                                                    marginTopStyle = marginTopStyle && marginTopStyle.match( pxLengthRegex );
+                                                    value = parseInt( marginTopStyle, 10 );
+
+                                                    this.setValue( value );
+                                                }
+                                            },
+                                            commit: function( type, element ) {
+                                                var value = parseInt( this.getValue(), 10 );
+                                                if ( type == IMAGE || type == PREVIEW ) {
+                                                    if ( !isNaN( value ) ) {
+                                                        element.setStyle( 'margin-top', CKEDITOR.tools.cssLength( value ) );
+                                                    } else if ( !value && this.isChanged() ) {
+                                                        element.removeStyle( 'margin-top' );
+                                                    }
+
+                                                    if ( type == IMAGE )
+                                                        element.removeAttribute( 'vspace' );
+                                                } else if ( type == CLEANUP ) {
+                                                    element.removeAttribute( 'vspace' );
+                                                    element.removeStyle( 'margin-top' );
+                                                }
+                                            }
+                                        },
+                                        {
+                                            type: 'text',
+                                            id: 'txtSpaceBottom',
+                                            requiredContent: 'img{margin-bottom}',
+                                            width: '60px',
+                                            'default': '',
+                                            onKeyUp: function() {
+                                                updatePreview( this.getDialog() );
+                                            },
+                                            onChange: function() {
+                                                commitInternally.call( this, 'advanced:txtdlgGenStyle' );
+                                            },
+                                            validate: CKEDITOR.dialog.validate.integer( editor.lang.image.validateVSpace ),
+                                            setup: function( type, element ) {
+                                                if ( type == IMAGE ) {
+                                                    var value,
+                                                        marginBottomStyle = element.getStyle( 'margin-bottom' );
+
+                                                    marginBottomStyle = marginBottomStyle && marginBottomStyle.match( pxLengthRegex );
+                                                    value = parseInt( marginBottomStyle, 10 );
+
+                                                    this.setValue( value );
+                                                }
+                                            },
+                                            commit: function( type, element ) {
+                                                var value = parseInt( this.getValue(), 10 );
+                                                if ( type == IMAGE || type == PREVIEW ) {
+                                                    if ( !isNaN( value ) ) {
+                                                        element.setStyle( 'margin-bottom', CKEDITOR.tools.cssLength( value ) );
+                                                    } else if ( !value && this.isChanged() ) {
+                                                        element.removeStyle( 'margin-bottom' );
+                                                    }
+
+                                                    if ( type == IMAGE )
+                                                        element.removeAttribute( 'vspace' );
+                                                } else if ( type == CLEANUP ) {
+                                                    element.removeAttribute( 'vspace' );
+                                                    element.removeStyle( 'margin-bottom' );
+                                                }
+                                            }
+                                        }
+									]
 								} ]
 							} ]
 						},
