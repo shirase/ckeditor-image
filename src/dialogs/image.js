@@ -1159,7 +1159,7 @@
 						}
 					} ]
 				},
-				{
+				/*{
 					id: 'Upload',
 					hidden: true,
 					filebrowser: 'uploadButton',
@@ -1184,7 +1184,7 @@
 							'for': [ 'Upload', 'upload' ]
 						}
 					]
-				},
+				},*/
 				{
 					id: 'advanced',
 					label: editor.lang.common.advancedTab,
